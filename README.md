@@ -1,4 +1,4 @@
-# 🌐 MCP Servers Monorepo 🚀
+# 🤖 MCP Servers Monorepo
 
 ## 📡 What is MCP?
 
