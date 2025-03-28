@@ -16,11 +16,13 @@ Model Context Protocol (MCP) is a robust, flexible communication framework desig
 
 ## 🏗️ Project Structure
 
+We follow a basic structure:
+
 ```
 /mcp-servers
-  /cmd            # Main server entry points
-    /fs           # Filesystem MCP Server
-  /internal       # Internal packages and server implementations
-    /fs           # Filesystem server internals
-  README.md       # This document
+  /cmd
+    # MCP servers entrypoints
+  /internal
+    # A folder for each MCP server
+  README.md
 ```
