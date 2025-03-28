@@ -2,8 +2,8 @@ package fs
 
 import (
 	"context"
+	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
@@ -25,12 +25,12 @@ func (r *Read) File() {
 	readFileTool := mcp.NewTool(
 		"read_file",
 		mcp.WithDescription("Reads a file from the filesystem with the given path"),
-		mcp.WithString("path", mcp.Required(), mcp.Description("The path to the file to read")),
+		mcp.WithString("path", mcp.Required(), mcp.Description(fmt.Sprintf("The path to the file to read. The path should be the relative path from the current working directory %s", r.Path))),
 	)
 	r.Server.AddTool(readFileTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 		path := request.Params.Arguments["path"].(string)
 
-		content, err := os.ReadFile(filepath.Join(r.Path, path))
+		content, err := os.ReadFile(path)
 		if err != nil {
 			return nil, err
 		}
@@ -43,12 +43,12 @@ func (r *Read) Dir() {
 	readDirTool := mcp.NewTool(
 		"read_dir",
 		mcp.WithDescription("Reads a directory from the filesystem with the given path"),
-		mcp.WithString("path", mcp.Required(), mcp.Description("The path to the directory to read")),
+		mcp.WithString("path", mcp.Required(), mcp.Description(fmt.Sprintf("The path to the directory to read. The path should be the relative path from the current working directory %s", r.Path))),
 	)
 	r.Server.AddTool(readDirTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 		path := request.Params.Arguments["path"].(string)
 
-		files, err := os.ReadDir(filepath.Join(r.Path, path))
+		files, err := os.ReadDir(path)
 		if err != nil {
 			return nil, err
 		}
